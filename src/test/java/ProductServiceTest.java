@@ -99,7 +99,7 @@ public class ProductServiceTest {
         products.add(new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200));
 
         ProductServiceImpl productService = new ProductServiceImpl(products);
-        final Product result = productService.getProductByProductName("Spodnie1");
+        final boolean result = productService.isProductMoreThanZero("buty");
 
         Assert.assertFalse(result);
     }
