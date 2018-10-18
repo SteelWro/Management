@@ -6,7 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductServiceImpl implements ProductService{
-    List<Product> products;
+    private static ProductServiceImpl instance = null;
+
+    private ProductServiceImpl(){
+
+    }
+
+    public static ProductServiceImpl getInstance(){
+        if(instance == null){
+            instance = new ProductServiceImpl();
+        }
+        return instance
+    }
 
     public ProductServiceImpl(List<Product> products) {
         this.products = products;

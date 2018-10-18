@@ -61,12 +61,13 @@ public class ProductServiceTest {
     @Test
     public void testGetProductByProductName() {
         List<Product> products = new ArrayList<Product>();
-        products.add(new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200));
+        Product product = new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200);
+        products.add(product);
 
         ProductServiceImpl productService = new ProductServiceImpl(products);
         final Product result = productService.getProductByProductName("Spodnie1");
 
-        Assert.assertEquals("Spodnie1", result);
+        Assert.assertEquals(product, result);
 
     }
 
