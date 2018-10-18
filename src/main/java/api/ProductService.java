@@ -9,6 +9,6 @@ public interface ProductService {
     Integer getProductsCount();
     Product getProductByProductName(String ProductName);
     Boolean isProductMoreThanZero(String ProductName);
-    Boolean isExistByProductName(String ProductName);
-    Boolean isExistById(int id);
+    Boolean isProductExist(String ProductName);
+    Boolean isProductExist(Long id);
 }

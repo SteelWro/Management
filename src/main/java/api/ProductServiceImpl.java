@@ -8,10 +8,6 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService{
     List<Product> products;
 
-    public ProductServiceImpl() {
-        products = new ArrayList<Product>();
-    }
-
     public ProductServiceImpl(List<Product> products) {
         this.products = products;
     }
@@ -25,18 +21,31 @@ public class ProductServiceImpl implements ProductService{
     }
 
     public Product getProductByProductName(String ProductName) {
+        for(Product product : products){
+            if(product.getProductName().equals(ProductName)) return product;
+        }
         return null;
+
     }
 
     public Boolean isProductMoreThanZero(String ProductName) {
-        return null;
+        for(Product product : products){
+            if(isProductExist(ProductName)&&product.getProductCount()>0) return true;
+        }
+        return false;
     }
 
-    public Boolean isExistByProductName(String ProductName) {
-        return null;
+    public Boolean isProductExist(String ProductName) {
+        for(Product product : products){
+            if(product.getProductName().equals(ProductName)) return true;
+        }
+        return false;
     }
 
-    public Boolean isExistById(int id) {
-        return null;
+    public Boolean isProductExist(Long id) {
+        for(Product product : products){
+            if(product.getId().equals(id)) return true;
+        }
+        return false;
     }
 }

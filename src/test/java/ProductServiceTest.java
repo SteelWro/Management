@@ -96,10 +96,10 @@ public class ProductServiceTest {
     @Test
     public void testNotIsProductMoreThanZero() {
         List<Product> products = new ArrayList<Product>();
-        products.add(new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200));
+        products.add(new Product(1l,"Spodnie1",20.2,2.12,"carmazine",0));
 
         ProductServiceImpl productService = new ProductServiceImpl(products);
-        final boolean result = productService.isProductMoreThanZero("buty");
+        final boolean result = productService.isProductMoreThanZero("Spodnie1");
 
         Assert.assertFalse(result);
     }
@@ -108,24 +108,44 @@ public class ProductServiceTest {
     public void testIsExistByProductName() {
         List<Product> products = new ArrayList<Product>();
         products.add(new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200));
+
+        ProductServiceImpl productService = new ProductServiceImpl(products);
+        final boolean result = productService.isProductExist("Spodnie1");
+
+        Assert.assertTrue(result);
     }
 
     @Test
     public void testNotIsExistByProductName() {
         List<Product> products = new ArrayList<Product>();
         products.add(new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200));
+
+        ProductServiceImpl productService = new ProductServiceImpl(products);
+        final boolean result = productService.isProductExist("Kalosze");
+
+        Assert.assertFalse(result);
     }
 
     @Test
     public void testIsExistById() {
         List<Product> products = new ArrayList<Product>();
         products.add(new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200));
+
+        ProductServiceImpl productService = new ProductServiceImpl(products);
+        final boolean result = productService.isProductExist(1l);
+
+        Assert.assertTrue(result);
     }
 
     @Test
     public void testNotIsExistById() {
         List<Product> products = new ArrayList<Product>();
         products.add(new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200));
+
+        ProductServiceImpl productService = new ProductServiceImpl(products);
+        final boolean result = productService.isProductExist(2l);
+
+        Assert.assertFalse(result);
     }
 
 
