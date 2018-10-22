@@ -11,12 +11,12 @@ public class ProductServiceImpl implements ProductService{
     private ProductServiceImpl(){
 
     }
-
+    List<Product> products;
     public static ProductServiceImpl getInstance(){
         if(instance == null){
             instance = new ProductServiceImpl();
         }
-        return instance
+        return instance;
     }
 
     public ProductServiceImpl(List<Product> products) {

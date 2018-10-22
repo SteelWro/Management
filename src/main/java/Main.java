@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ProductDaoImpl pdi = new ProductDaoImpl("product.txt");
 
-
+pdi.saveProduct(new Product(3l,"Spodnie1",20.2,2.12,"carmazine",200));
         pdi.removeProductById(2l);
 
 //        Product p = new Product(1l,"Spodnie1",20.2,2.12,"carmazine",200);

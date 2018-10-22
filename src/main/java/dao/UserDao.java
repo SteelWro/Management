@@ -2,15 +2,17 @@ package dao;
 
 import entity.User;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface UserDao
 {
-    void saveUser(User user);
-    void saveUsers(List<User> users);
-    List<User> getAllUsers();
-    User getUserByLogin(String login);
-    User getUserById(Long userId);
-    User removeUserByLogin(String login);
-    User removeUserById(Long id);
+    void saveUser(User user) throws IOException;
+    void saveUsers(List<User> users) throws FileNotFoundException;
+    List<User> getAllUsers() throws IOException;
+    User getUserByLogin(String login) throws IOException;
+    User getUserById(Long userId) throws IOException;
+    void removeUserByLogin(String login) throws IOException;
+    void removeUserById(Long id) throws IOException;
 }
