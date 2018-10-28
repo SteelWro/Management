@@ -2,15 +2,25 @@ package api;
 
 import api.UserService;
 import entity.User;
+import exception.UserLoginAlreadyExistException;
+import exception.UserShortLengthPasswordException;
+import exception.UserShortLoginLengthException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    List<User> users;
+    public static UserServiceImpl instance = null;
+    UserValidator userValidator = UserValidator.getInstance();
 
-    public UserServiceImpl() {
-        this.users = new ArrayList<User>();
+    private UserServiceImpl(){
+    }
+
+    public static UserServiceImpl getInstance(){
+        if(instance==null){
+            instance = new UserServiceImpl();
+        }
+        return instance;
     }
 
     public UserServiceImpl(List<User> users) {
@@ -22,7 +32,17 @@ public class UserServiceImpl implements UserService {
     }
 
     public void addUser(User user) {
-        this.users.add(user);
+        try {
+            if(userValidator.isValidate(user)){
+                users.add(user);
+            }
+        } catch (UserLoginAlreadyExistException e) {
+            e.printStackTrace();
+        } catch (UserShortLengthPasswordException e) {
+            e.printStackTrace();
+        } catch (UserShortLoginLengthException e) {
+            e.printStackTrace();
+        }
     }
 
     public void removeUserById(Long userId) {

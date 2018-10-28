@@ -3,7 +3,6 @@ package entity.parser;
 import entity.Product;
 import entity.User;
 
-import javax.jws.soap.SOAPBinding;
 
 public class Parser {
     public static Product parseStringToProduct(String line){

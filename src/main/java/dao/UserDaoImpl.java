@@ -5,12 +5,30 @@ import entity.User;
 import entity.parser.Parser;
 import utils.FileUtils;
 
+import javax.jws.soap.SOAPBinding;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
     private String fileName;
+    private static UserDaoImpl instance = null;
+
+    private UserDaoImpl(){
+        try{
+            FileUtils.createNewFile(fileName);
+        }catch (IOException e){
+            System.out.println("Bad file Path");
+            System.exit(-1);
+        }
+    }
+
+    public static UserDaoImpl getInstance(){
+        if(instance == null){
+            instance = new UserDaoImpl();
+        }
+    return instance;
+    }
 
     public UserDaoImpl(String fileName){
         this.fileName = fileName;
@@ -86,4 +104,6 @@ public class UserDaoImpl implements UserDao {
 
         saveUsers(users);
     }
+
+
 }
