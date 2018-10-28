@@ -15,12 +15,7 @@ public class UserDaoImpl implements UserDao {
     private static UserDaoImpl instance = null;
 
     private UserDaoImpl(){
-        try{
-            FileUtils.createNewFile(fileName);
-        }catch (IOException e){
-            System.out.println("Bad file Path");
-            System.exit(-1);
-        }
+        FileUtils.createNewFile(fileName);
     }
 
     public static UserDaoImpl getInstance(){
@@ -34,15 +29,25 @@ public class UserDaoImpl implements UserDao {
         this.fileName = fileName;
     }
 
-    public void saveUser(User user) throws IOException {
-    List<User> users = getAllUsers();
-    users.add(user);
-    saveUsers(users);
+    public void saveUser(User user) {
+        List<User> users = null;
+        try {
+            users = getAllUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        users.add(user);
+        saveUsers(users);
     }
 
-    public void saveUsers(List<User> users) throws FileNotFoundException {
+    public void saveUsers(List<User> users){
         FileUtils.clearFile(fileName);
-        PrintWriter printWriter = new PrintWriter(new FileOutputStream(fileName, true));
+        PrintWriter printWriter = null;
+        try {
+            printWriter = new PrintWriter(new FileOutputStream(fileName, true));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         for(User user : users){
             printWriter.write(user.toString() + "\n");
         }
@@ -67,8 +72,13 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-    public User getUserByLogin(String login) throws IOException {
-        List<User> users = getAllUsers();
+    public User getUserByLogin(String login){
+        List<User> users = null;
+        try {
+            users = getAllUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for(User user : users){
             if(user.getLogin().equals(login)) return user;
@@ -76,8 +86,13 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    public User getUserById(Long userId) throws IOException {
-        List<User> users = getAllUsers();
+    public User getUserById(Long userId) {
+        List<User> users = null;
+        try {
+            users = getAllUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for(User user : users){
             if(user.getLogin().equals(userId)) return user;
@@ -85,8 +100,13 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    public void removeUserByLogin(String login) throws IOException {
-        List<User> users = getAllUsers();
+    public void removeUserByLogin(String login)  {
+        List<User> users = null;
+        try {
+            users = getAllUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for(int i=0;i<users.size();i++){
             if(users.get(i).getLogin().equals(login)) users.remove(i);
@@ -95,8 +115,13 @@ public class UserDaoImpl implements UserDao {
         saveUsers(users);
     }
 
-    public void removeUserById(Long id) throws IOException {
-        List<User> users = getAllUsers();
+    public void removeUserById(Long id){
+        List<User> users = null;
+        try {
+            users = getAllUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         for(int i=0;i<users.size();i++){
             if(users.get(i).getId().equals(id)) users.remove(i);
