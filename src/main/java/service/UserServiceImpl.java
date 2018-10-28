@@ -1,15 +1,14 @@
-package api;
+package service;
 
+import api.UserDao;
 import api.UserService;
-import dao.UserDao;
+import Validator.UserValidator;
 import dao.UserDaoImpl;
 import entity.User;
 import exception.UserLoginAlreadyExistException;
 import exception.UserShortLengthPasswordException;
 import exception.UserShortLoginLengthException;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {

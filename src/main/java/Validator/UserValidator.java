@@ -1,6 +1,6 @@
-package api;
+package Validator;
 
-import dao.UserDao;
+import api.UserDao;
 import dao.UserDaoImpl;
 import entity.User;
 import exception.UserLoginAlreadyExistException;
@@ -35,11 +35,7 @@ public class UserValidator {
 
     public boolean isUserByLoginExist(String login)  {
         User user = null;
-        try {
-            if(userDao.getUserByLogin(login) instanceof User) return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if(userDao.getUserByLogin(login) instanceof User) return true;
         return false;
     }
 

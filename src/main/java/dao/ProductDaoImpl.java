@@ -1,5 +1,6 @@
 package dao;
 
+import api.ProductDao;
 import entity.Product;
 import entity.parser.Parser;
 import utils.FileUtils;
@@ -8,7 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductDaoImpl implements ProductDao{
+public class ProductDaoImpl implements ProductDao {
 
     private String fileName;
 

@@ -1,11 +1,11 @@
-package api;
+package service;
 
+import api.ProductService;
 import entity.Product;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
     private static ProductServiceImpl instance = null;
 
     private ProductServiceImpl(List<Product> products){

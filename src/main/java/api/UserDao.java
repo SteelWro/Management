@@ -1,4 +1,4 @@
-package dao;
+package api;
 
 import entity.User;
 
@@ -10,7 +10,7 @@ public interface UserDao
 {
     void saveUser(User user);
     void saveUsers(List<User> users) ;
-    List<User> getAllUsers();
+    List<User> getAllUsers() throws IOException;
     User getUserByLogin(String login);
     User getUserById(Long userId);
     void removeUserByLogin(String login);

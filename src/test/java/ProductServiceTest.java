@@ -1,4 +1,4 @@
-import api.ProductServiceImpl;
+import service.ProductServiceImpl;
 import entity.Product;
 import org.junit.Assert;
 import org.junit.Test;

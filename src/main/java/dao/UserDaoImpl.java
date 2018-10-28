@@ -1,11 +1,10 @@
 package dao;
 
-import entity.Product;
+import api.UserDao;
 import entity.User;
 import entity.parser.Parser;
 import utils.FileUtils;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

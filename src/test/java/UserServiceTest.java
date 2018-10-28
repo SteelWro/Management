@@ -1,4 +1,4 @@
-import api.UserServiceImpl;
+import service.UserServiceImpl;
 import entity.User;
 import org.junit.Assert;
 import org.junit.Test;
