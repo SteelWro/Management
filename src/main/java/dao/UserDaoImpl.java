@@ -10,22 +10,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    private String fileName;
+    private String fileName = "users.txt";
     private static UserDaoImpl instance = null;
 
     private UserDaoImpl(){
-        FileUtils.createNewFile(fileName);
+        try {
+            FileUtils.createNewFile(fileName);
+        } catch (IOException e) {
+            System.out.println(e+": Error with creating file");
+        }
     }
 
-    public static UserDaoImpl getInstance(){
-        if(instance == null){
+    public static UserDaoImpl getInstance() {
+        if (instance == null) {
             instance = new UserDaoImpl();
         }
-    return instance;
-    }
-
-    public UserDaoImpl(String fileName){
-        this.fileName = fileName;
+        return instance;
     }
 
     public void saveUser(User user) {
@@ -40,7 +40,11 @@ public class UserDaoImpl implements UserDao {
     }
 
     public void saveUsers(List<User> users){
-        FileUtils.clearFile(fileName);
+        try {
+            FileUtils.clearFile(fileName);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         PrintWriter printWriter = null;
         try {
             printWriter = new PrintWriter(new FileOutputStream(fileName, true));

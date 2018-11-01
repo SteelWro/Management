@@ -9,6 +9,7 @@ import exception.UserLoginAlreadyExistException;
 import exception.UserShortLengthPasswordException;
 import exception.UserShortLoginLengthException;
 
+import java.io.IOException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -27,7 +28,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        try {
+            return userDao.getAllUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void addUser(User user) {

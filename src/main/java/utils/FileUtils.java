@@ -8,22 +8,13 @@ import java.io.PrintWriter;
 
 public class FileUtils {
 
-    public static void createNewFile(String fileName)  {
+    public static void createNewFile(String fileName) throws IOException {
         File file = new File(fileName);
-        try {
             file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
-    public static void clearFile(String fileName){
-        PrintWriter pw = null;
-        try {
-            pw = new PrintWriter(fileName);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public static void clearFile(String fileName) throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(fileName);
         pw.close();
     }
 
