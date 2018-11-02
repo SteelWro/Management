@@ -5,9 +5,9 @@ import api.UserService;
 import validator.UserValidator;
 import dao.UserDaoImpl;
 import entity.User;
-import exception.UserLoginAlreadyExistException;
-import exception.UserShortLengthPasswordException;
-import exception.UserShortLoginLengthException;
+import exception.userException.UserLoginAlreadyExistException;
+import exception.userException.UserShortLengthPasswordException;
+import exception.userException.UserShortLoginLengthException;
 
 import java.io.IOException;
 import java.util.List;

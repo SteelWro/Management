@@ -1,4 +1,4 @@
-package exception;
+package exception.userException;
 
 public class UserLoginAlreadyExistException extends Exception {
     public UserLoginAlreadyExistException(String message){
