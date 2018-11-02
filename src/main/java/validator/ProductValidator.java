@@ -2,7 +2,9 @@ package validator;
 
 import entity.Product;
 import exception.productException.ProductCountNegativeException;
+import exception.productException.ProductNameEmptyException;
 import exception.productException.ProductPriceNoPositiveException;
+import exception.productException.ProductWeightNoPositiveException;
 
 public class ProductValidator {
     private static ProductValidator instance = null;
@@ -28,6 +30,15 @@ public class ProductValidator {
 
     }
 
-    public boolean isWageMoreThanZero
+    public boolean isWageMoreThanZero(Product product) throws ProductWeightNoPositiveException {
+        if(product.getWeight() > 0) return true;
+        else throw new ProductWeightNoPositiveException("waga produktu jest ujemna");
+    }
+
+    public boolean isNameIsEmpty(Product product) throws ProductNameEmptyException {
+        if(product.getProductName().equals("") || product.getProductName().equals(null))
+            throw new ProductNameEmptyException("brak nazwy produktu");
+        else return true;
+    }
 
 }
