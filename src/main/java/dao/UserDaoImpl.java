@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
         return instance;
     }
 
-    public void saveUser(User user) {
+    public void saveUser(User user) throws FileNotFoundException {
         List<User> users = null;
         try {
             users = getAllUsers();
@@ -39,18 +39,11 @@ public class UserDaoImpl implements UserDao {
         saveUsers(users);
     }
 
-    public void saveUsers(List<User> users){
-        try {
-            FileUtils.clearFile(fileName);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void saveUsers(List<User> users) throws FileNotFoundException {
+        FileUtils.clearFile(fileName);
         PrintWriter printWriter = null;
-        try {
-            printWriter = new PrintWriter(new FileOutputStream(fileName, true));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        printWriter = new PrintWriter(new FileOutputStream(fileName, true));
+
         for(User user : users){
             printWriter.write(user.toString() + "\n");
         }
@@ -75,41 +68,9 @@ public class UserDaoImpl implements UserDao {
         return users;
     }
 
-    public User getUserByLogin(String login){
+    public void removeUserByLogin(String login) throws IOException {
         List<User> users = null;
-        try {
-            users = getAllUsers();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for(User user : users){
-            if(user.getLogin().equals(login)) return user;
-        }
-        return null;
-    }
-
-    public User getUserById(Long userId) {
-        List<User> users = null;
-        try {
-            users = getAllUsers();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for(User user : users){
-            if(user.getLogin().equals(userId)) return user;
-        }
-        return null;
-    }
-
-    public void removeUserByLogin(String login)  {
-        List<User> users = null;
-        try {
-            users = getAllUsers();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        users = getAllUsers();
 
         for(int i=0;i<users.size();i++){
             if(users.get(i).getLogin().equals(login)) users.remove(i);
@@ -118,13 +79,9 @@ public class UserDaoImpl implements UserDao {
         saveUsers(users);
     }
 
-    public void removeUserById(Long id){
+    public void removeUserById(Long id) throws IOException {
         List<User> users = null;
-        try {
-            users = getAllUsers();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        users = getAllUsers();
 
         for(int i=0;i<users.size();i++){
             if(users.get(i).getId().equals(id)) users.remove(i);
@@ -132,6 +89,34 @@ public class UserDaoImpl implements UserDao {
 
         saveUsers(users);
     }
+
+   // public User getUserByLogin(String login){
+//        List<User> users = null;
+//        try {
+//            users = getAllUsers();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        for(User user : users){
+//            if(user.getLogin().equals(login)) return user;
+//        }
+//        return null;
+//    }
+//
+//    public User getUserById(Long userId) {
+//        List<User> users = null;
+//        try {
+//            users = getAllUsers();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        for(User user : users){
+//            if(user.getLogin().equals(userId)) return user;
+//        }
+//        return null;
+//    }
 
 
 }

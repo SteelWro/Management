@@ -1,4 +1,4 @@
-package Validator;
+package validator;
 
 import api.UserDao;
 import dao.UserDaoImpl;
@@ -6,8 +6,6 @@ import entity.User;
 import exception.UserLoginAlreadyExistException;
 import exception.UserShortLengthPasswordException;
 import exception.UserShortLoginLengthException;
-
-import java.io.IOException;
 
 public class UserValidator {
     private UserDao userDao = UserDaoImpl.getInstance();

@@ -2,7 +2,7 @@ package service;
 
 import api.UserDao;
 import api.UserService;
-import Validator.UserValidator;
+import validator.UserValidator;
 import dao.UserDaoImpl;
 import entity.User;
 import exception.UserLoginAlreadyExistException;

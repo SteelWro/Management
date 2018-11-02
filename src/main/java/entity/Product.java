@@ -7,6 +7,7 @@ public class Product {
     private double weight;
     private String color;
     private int productCount;
+    private static final String productType = "P";
     public static final String PRODUCT_SEPARATOR = "#";
 
     public Product(Long id, String productName, double price, double weight, String color, int productCount) {
@@ -50,9 +51,13 @@ public class Product {
         return productCount;
     }
 
+    protected String getBasicToString(){
+        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+    }
+
     @Override
     public String toString() {
-        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+       return productType + PRODUCT_SEPARATOR + getBasicToString();
     }
 
 

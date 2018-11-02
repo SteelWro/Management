@@ -23,38 +23,26 @@ public class ProductDaoImpl implements ProductDao{
         return instance;
     }
 
-    public void saveProduct(Product product) {
+    public void saveProduct(Product product) throws IOException {
         List<Product> products = null;
-        try {
-            products = getAllProducts();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        products = getAllProducts();
         products.add(product);
         saveProducts(products);
     }
 
-    public void saveProducts(List<Product> products) {
+    public void saveProducts(List<Product> products) throws FileNotFoundException {
         FileUtils.clearFile(fileName);
         PrintWriter printWriter = null;
-        try {
-            printWriter = new PrintWriter(new FileOutputStream(fileName, true));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        printWriter = new PrintWriter(new FileOutputStream(fileName, true));
         for(Product product : products){
             printWriter.write(product.toString() + "\n");
         }
         printWriter.close();
     }
 
-    public void removeProductById(Long productId){
+    public void removeProductById(Long productId) throws IOException {
         List<Product> products = null;
-        try {
-            products = getAllProducts();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        products = getAllProducts();
 
         for(int i=0;i<products.size();i++){
             boolean isFoundProduct = products.get(i).getId().equals(productId);
@@ -66,13 +54,9 @@ public class ProductDaoImpl implements ProductDao{
         saveProducts(products);
     }
 
-    public void removeProductByName(String productName) {
+    public void removeProductByName(String productName) throws IOException {
         List<Product> products = null;
-        try {
-            products = getAllProducts();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        products = getAllProducts();
 
         for(int i=0;i<products.size(); i++){
             boolean isFoundProduct = products.get(i).getProductName().equals(productName);
@@ -101,31 +85,28 @@ public class ProductDaoImpl implements ProductDao{
 
         return products;
     }
-
-    public Product getProductById(Long productId) throws IOException{
-        List<Product> products = null;
-        products = getAllProducts();
-        boolean find = false;
-        for(Product product : products){
-            if(product.getId().equals(productId)) find = true; return product;
-        }
-        return null;
-    }
-
-    public Product getProductByProductName(String productName) {
-        List<Product> products = null;
-        try {
-            products = getAllProducts();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        boolean find = false;
-        for(Product product : products){
-            if(product.getId().equals(productName)) find = true; return product;
-        }
-        return null;
-
-    }
+//to jest niepotrzebne
+//    public Product getProductById(Long productId) throws IOException{
+//        List<Product> products = null;
+//        products = getAllProducts();
+//        boolean find = false;
+//        for(Product product : products){
+//            if(product.getId().equals(productId)) find = true; return product;
+//        }
+//        return null;
+//    }
+//
+//    public Product getProductByProductName(String productName) throws IOException {
+//        List<Product> products = null;
+//        products = getAllProducts();
+//
+//        boolean find = false;
+//        for(Product product : products){
+//            if(product.getId().equals(productName)) find = true; return product;
+//        }
+//        return null;
+//
+//    }
 
 
 
