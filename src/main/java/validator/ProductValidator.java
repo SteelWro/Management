@@ -19,6 +19,24 @@ public class ProductValidator {
         return instance;
     }
 
+    public boolean isValidate(Product product){
+        try {
+            isPriceMoreThanZero(product);
+            isProductCountMoreThanZero(product);
+            isWageMoreThanZero(product);
+            isNameIsNotEmpty(product);
+        } catch (ProductPriceNoPositiveException e) {
+            System.out.println(e.getMessage());
+        } catch (ProductWeightNoPositiveException e) {
+            System.out.println(e.getMessage());
+        } catch (ProductCountNegativeException e) {
+            System.out.println(e.getMessage());
+        } catch (ProductNameEmptyException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
+
     public boolean isPriceMoreThanZero(Product product) throws ProductPriceNoPositiveException {
         if(product.getPrice() > 0) return true;
         else throw new ProductPriceNoPositiveException("Cena jest ujemna");
@@ -35,10 +53,10 @@ public class ProductValidator {
         else throw new ProductWeightNoPositiveException("waga produktu jest ujemna");
     }
 
-    public boolean isNameIsEmpty(Product product) throws ProductNameEmptyException {
+    public boolean isNameIsNotEmpty(Product product) throws ProductNameEmptyException {
         if(product.getProductName().equals("") || product.getProductName().equals(null))
             throw new ProductNameEmptyException("brak nazwy produktu");
-        else return true;
+        return true;
     }
 
 }

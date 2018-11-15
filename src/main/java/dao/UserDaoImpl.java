@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDao {
         return instance;
     }
 
-    public void saveUser(User user) throws FileNotFoundException {
+    public void saveUser(User user){
         List<User> users = null;
         try {
             users = getAllUsers();
@@ -36,7 +36,11 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         }
         users.add(user);
-        saveUsers(users);
+        try {
+            saveUsers(users);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveUsers(List<User> users) throws FileNotFoundException {
@@ -90,33 +94,33 @@ public class UserDaoImpl implements UserDao {
         saveUsers(users);
     }
 
-   // public User getUserByLogin(String login){
-//        List<User> users = null;
-//        try {
-//            users = getAllUsers();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        for(User user : users){
-//            if(user.getLogin().equals(login)) return user;
-//        }
-//        return null;
-//    }
-//
-//    public User getUserById(Long userId) {
-//        List<User> users = null;
-//        try {
-//            users = getAllUsers();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        for(User user : users){
-//            if(user.getLogin().equals(userId)) return user;
-//        }
-//        return null;
-//    }
+    public User getUserByLogin(String login){
+        List<User> users = null;
+        try {
+            users = getAllUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(User user : users){
+            if(user.getLogin().equals(login)) return user;
+        }
+        return null;
+    }
+
+    public User getUserById(Long userId) {
+        List<User> users = null;
+        try {
+            users = getAllUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for(User user : users){
+            if(user.getLogin().equals(userId)) return user;
+        }
+        return null;
+    }
 
 
 }

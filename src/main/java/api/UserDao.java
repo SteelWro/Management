@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserDao
 {
-    void saveUser(User user) throws FileNotFoundException;
+    void saveUser(User user);
     void saveUsers(List<User> users) throws FileNotFoundException;
 
     void removeUserByLogin(String login) throws IOException;

@@ -14,5 +14,6 @@ public interface ProductService {
     Boolean isProductExist(String ProductName) throws IOException;
     Boolean isProductExist(Long id) throws IOException;
 
-    boolean saveProduct(Product product);
+    boolean saveProduct(Product product) throws IOException;
+    void removeProduct(Product product) throws IOException;
 }

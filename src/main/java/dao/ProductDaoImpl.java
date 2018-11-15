@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ProductDaoImpl implements ProductDao{
     private static ProductDaoImpl instance = null;
-    private String fileName = "product.txt";
+    private static final String fileName = "products.txt";
 
     public ProductDaoImpl(){
     }
@@ -70,7 +70,7 @@ public class ProductDaoImpl implements ProductDao{
 
     public List<Product> getAllProducts() throws IOException {
         List<Product> products = new ArrayList<Product>();
-        BufferedReader bufferedReader = new BufferedReader(new FileReader("product.txt"));
+        BufferedReader bufferedReader = new BufferedReader(new FileReader("products.txt"));
         String line = bufferedReader.readLine();
 
         while(line!=null){

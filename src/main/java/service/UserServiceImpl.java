@@ -15,8 +15,8 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl instance = null;
-    UserDao userDao = UserDaoImpl.getInstance();
-    UserValidator userValidator = UserValidator.getInstance();
+    private UserDao userDao = UserDaoImpl.getInstance();
+    private UserValidator userValidator = UserValidator.getInstance();
 
     private UserServiceImpl(){
     }
@@ -38,17 +38,28 @@ public class UserServiceImpl implements UserService {
     }
 
     public User getUserById(Long userId) {
+        List<User> users = getAllUsers();
+
+        for(User user : users){
+            if(user.getId().equals(userId)) return user;
+        }
         return null;
     }
 
     public User getUserByLogin(String login) {
+        List<User> users = getAllUsers();
+
+        for(User user : users){
+            if(user.getLogin().equals(login)) return user;
+        }
         return null;
     }
 
-    public void addUser(User user) throws FileNotFoundException {
+    public boolean addUser(User user)  {
         try {
-            if(userValidator.isValidate(user) && isUserByLoginExist(user.getLogin())){
+            if(userValidator.isValidate(user) && isUserByLoginNotExist(user.getLogin())){
                 userDao.saveUser(user);
+                return true;
             }
         } catch (UserLoginAlreadyExistException e) {
             e.printStackTrace();
@@ -57,14 +68,30 @@ public class UserServiceImpl implements UserService {
         } catch (UserShortLoginLengthException e) {
             e.printStackTrace();
         }
+        return false;
+    }
+
+    public boolean isLogedConfirm(String login, String password) {
+        User user = getUserByLogin(login);
+
+        if(!user.equals(null))
+        {
+            return user.getPassword().equals(password);
+        }
+        return false;
     }
 
     public void removeUserById(Long userId) throws IOException {
         userDao.removeUserById(userId);
     }
 
-    public boolean isUserByLoginExist(String login) throws UserLoginAlreadyExistException {
-        if(getUserByLogin(login) instanceof User) return true;
-        else throw new UserLoginAlreadyExistException("Już istnieje taki user z takim loginem");
+    public boolean isUserByLoginNotExist(String login) throws UserLoginAlreadyExistException {
+        List<User> users = getAllUsers();
+
+        for(User user : users){
+            if(user.getLogin().equals(login)) throw new UserLoginAlreadyExistException("Już istnieje taki user z takim loginem");
+        }
+
+        return true;
     }
 }

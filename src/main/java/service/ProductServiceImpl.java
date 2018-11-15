@@ -4,6 +4,7 @@ import api.ProductDao;
 import api.ProductService;
 import dao.ProductDaoImpl;
 import entity.Product;
+import validator.ProductValidator;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     ProductDao productDao = ProductDaoImpl.getInstance();
     private static ProductServiceImpl instance = null;
+    ProductValidator productValidator = ProductValidator.getInstance();
 
     private ProductServiceImpl(){
     }
@@ -48,20 +50,32 @@ public class ProductServiceImpl implements ProductService {
             if(product.getId().equals(id)) return true;
         }
         return false;
+
     }
 
-    public boolean saveProduct(Product product) {
-        return false;
-    }
-
-    public Product getProductByProductName(String ProductName) throws IOException {
-        return productDao.getProductByProductName(ProductName);
-    }
-
-    public Boolean isProductMoreThanZero(String ProductName) throws IOException {
-        if(isProductExist(ProductName)){
-            if(productDao.getProductByProductName(ProductName).getProductCount()>0) return true;
+    public boolean saveProduct(Product product) throws IOException {
+        if(productValidator.isValidate(product)){
+            productDao.saveProduct(product);
+            return true;
         }
+    return false;
+    }
+
+    public void removeProduct(Product product) throws IOException {
+        productDao.removeProductByName(product.getProductName());
+    }
+
+    public Product getProductByProductName(String productName) throws IOException {
+        List<Product> products = getAllProducts();
+        for(Product product : products)
+            if(product.getProductName().equals(productName)) return product;
+        return null;
+    }
+
+    public Boolean isProductMoreThanZero(String productName) throws IOException {
+        List<Product> products = getAllProducts();
+        for(Product product : products)
+            if(product.getProductName().equals(productName) && product.getProductCount()>0) return true;
         return false;
 
     }
