@@ -2,18 +2,19 @@ package entity.parser;
 
 import entity.Boots;
 import entity.Cloth;
+import entity.Enum.ProductSeparators;
 import entity.Product;
 import entity.User;
 
 
 public class Parser {
     public static Product parseStringToProduct(String line){
-        String[] productInf = line.split(Product.PRODUCT_SEPARATOR);
-        if(productInf[0].equals("P"))
+        String[] productInf = line.split(ProductSeparators.PRODUCT_SEPARATOR.toString());
+        if(productInf[0].equals(ProductSeparators.PRODUCT_ID.toString()))
             return parseToProduct(productInf);
-        else if(productInf[0].equals("C"))
+        else if(productInf[0].equals(ProductSeparators.CLOTH_ID.toString()))
             return parseToCloth(productInf);
-        else if(productInf[0].equals("B"))
+        else if(productInf[0].equals(ProductSeparators.BOOTS_ID.toString()))
             return parseToBoots(productInf);
         else System.out.println("zły typ produktu");
 

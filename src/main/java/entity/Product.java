@@ -1,4 +1,5 @@
 package entity;
+import entity.Enum.ProductSeparators;
 
 public class Product {
     private Long id;
@@ -7,8 +8,6 @@ public class Product {
     private double weight;
     private String color;
     private int productCount;
-    private static final String productType = "P";
-    public static final String PRODUCT_SEPARATOR = "#";
 
     public Product(Long id, String productName, double price, double weight, String color, int productCount) {
         this.id = id;
@@ -52,12 +51,12 @@ public class Product {
     }
 
     protected String getBasicToString(){
-        return id + PRODUCT_SEPARATOR + productName + PRODUCT_SEPARATOR + price + PRODUCT_SEPARATOR + weight + PRODUCT_SEPARATOR + color + PRODUCT_SEPARATOR + productCount;
+        return id + ProductSeparators.PRODUCT_SEPARATOR.toString() + productName + ProductSeparators.PRODUCT_SEPARATOR.toString() + price + ProductSeparators.PRODUCT_SEPARATOR.toString() + weight + ProductSeparators.PRODUCT_SEPARATOR.toString() + color + ProductSeparators.PRODUCT_SEPARATOR.toString() + productCount;
     }
 
     @Override
     public String toString() {
-       return productType + PRODUCT_SEPARATOR + getBasicToString();
+       return  ProductSeparators.PRODUCT_ID.toString() + ProductSeparators.PRODUCT_SEPARATOR.toString() + getBasicToString();
     }
 
 
