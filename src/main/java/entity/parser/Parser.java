@@ -2,7 +2,10 @@ package entity.parser;
 
 import entity.Boots;
 import entity.Cloth;
+import entity.Enum.Colors;
+import entity.Enum.Material;
 import entity.Enum.ProductSeparators;
+import entity.Enum.SkinType;
 import entity.Product;
 import entity.User;
 
@@ -26,12 +29,12 @@ public class Parser {
         String productName = productInf[2];
         Float price = Float.parseFloat(productInf[3]);
         Float weight = Float.parseFloat(productInf[4]);
-        String color = productInf[5];
+        Colors color = ColorParser.strToColor(productInf[5]);
         Integer productCount = Integer.parseInt(productInf[6]);
         Integer size = Integer.parseInt(productInf[7]);
-        Boolean isNaturalSkin = Boolean.parseBoolean(productInf[8]);
+        SkinType skintype = BootsParser.strToBoots(productInf[8]);
 
-        return (new Boots(id, productName, price, weight, color, productCount,size,isNaturalSkin));
+        return (new Boots(id, productName, price, weight, color, productCount,size, skintype));
     }
 
     private static Product parseToCloth(String[] productInf){
@@ -39,10 +42,10 @@ public class Parser {
         String productName = productInf[2];
         Float price = Float.parseFloat(productInf[3]);
         Float weight = Float.parseFloat(productInf[4]);
-        String color = productInf[5];
+        Colors color = ColorParser.strToColor(productInf[5]);
         Integer productCount = Integer.parseInt(productInf[6]);
         String size = productInf[7];
-        String material = productInf[8];
+        Material material = ClothParser.strToCloth(productInf[8]);
 
         return (new Cloth(id, productName, price, weight, color, productCount,size,material));
     }
@@ -52,7 +55,7 @@ public class Parser {
         String productName = productInf[2];
         Float price = Float.parseFloat(productInf[3]);
         Float weight = Float.parseFloat(productInf[4]);
-        String color = productInf[5];
+        Colors color = ColorParser.strToColor(productInf[5]);
         Integer productCount = Integer.parseInt(productInf[6]);
 
         return (new Product(id, productName, price, weight, color, productCount));

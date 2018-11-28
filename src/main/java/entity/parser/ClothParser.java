@@ -3,18 +3,33 @@ package entity.parser;
 import entity.Enum.Material;
 
 public class ClothParser {
-    public static Material getCloth(String str){
-        if(str.equals("LEATHER")){
+    public static Material strToCloth(String str){
+        String cloth = str.toUpperCase();
+        if(cloth.equals("LEATHER")){
             return Material.LEATHER;
-        }if(str.equals("FUR")){
+        }if(cloth.equals("FUR")){
             return Material.FUR;
-        }if(str.equals("COTTON")){
+        }if(cloth.equals("COTTON")){
             return Material.COTTON;
-        }if(str.equals("WOOL")){
+        }if(cloth.equals("WOOL")){
             return Material.WOOL;
-        }if(str.equals("POLYESTER")){
+        }if(cloth.equals("POLYESTER")){
             return Material.POLYESTER;
         }
         return Material.DEFAULT;
     }
+
+//    public static Material toCloth(Material material){
+//        if(material.toString().equals("LEATHER")){
+//            return Material.LEATHER;
+//        }if(material.toString().equals("FUR")){
+//            return Material.FUR;
+//        }if(material.toString().equals("COTTON")){
+//            return Material.COTTON;
+//        }if(material.toString().equals("WOOL")){
+//            return Material.WOOL;
+//        }if(material.toString().equals("POLYESTER")){
+//            return Material.POLYESTER;
+//        }
+//    }
 }

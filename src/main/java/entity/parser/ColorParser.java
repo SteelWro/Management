@@ -3,18 +3,19 @@ package entity.parser;
 import entity.Enum.Colors;
 
 public class ColorParser {
-    static Colors getColor(String str) {
-        if ("RED".equals(str)) {
+    public static Colors strToColor(String str) {
+        String color = str.toUpperCase();
+        if ("RED".equals(color)) {
             return Colors.RED;
-        } else if ("GREEN".equals(str)) {
+        } else if ("GREEN".equals(color)) {
             return Colors.GREEN;
-        } else if ("BLUE".equals(str)) {
+        } else if ("BLUE".equals(color)) {
             return Colors.BLUE;
-        } else if ("BLUE".equals(str)) {
+        } else if ("WHITE".equals(color)) {
             return Colors.WHITE;
-        } else if ("BLUE".equals(str)) {
+        } else if ("BLACK".equals(color)) {
             return Colors.BLACK;
-        } else if ("BLUE".equals(str)) {
+        } else if ("YELLOW".equals(color)) {
             return Colors.YELLOW;
         }
         return Colors.DEFAULT;

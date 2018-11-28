@@ -1,4 +1,5 @@
 package entity;
+import entity.Enum.Colors;
 import entity.Enum.ProductSeparators;
 
 public class Product {
@@ -6,10 +7,10 @@ public class Product {
     private String productName;
     private double price;
     private double weight;
-    private String color;
+    private Colors color;
     private int productCount;
 
-    public Product(Long id, String productName, double price, double weight, String color, int productCount) {
+    public Product(Long id, String productName, double price, double weight, Colors color, int productCount) {
         this.id = id;
         this.productName = productName;
         this.price = price;
@@ -42,7 +43,7 @@ public class Product {
         return weight;
     }
 
-    public String getColor() {
+    public Colors getColor() {
         return color;
     }
 

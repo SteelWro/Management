@@ -1,20 +1,20 @@
-import api.ProductDao;
 import api.ProductService;
-import api.UserDao;
 import api.UserRegisterLoginFacade;
-import dao.ProductDaoImpl;
-import dao.UserDaoImpl;
 import entity.Boots;
 import entity.Cloth;
+import entity.Enum.Colors;
+import entity.Enum.Material;
+import entity.Enum.SkinType;
 import entity.Product;
 import entity.User;
+import entity.parser.BootsParser;
+import entity.parser.ClothParser;
+import entity.parser.ColorParser;
 import facade.UserRegisterLoginFacadeImpl;
 import service.ProductServiceImpl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -40,7 +40,7 @@ public class Main {
     }
 
     public static Product createOtherProduct() {
-        String productName, color;
+        String productName; Colors color;
         Float price, weight;
         Integer count;
         System.out.println("ProductName: ");
@@ -52,8 +52,8 @@ public class Main {
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
 
-        System.out.println("Color: ");
-        color = scanner.next();
+        System.out.println("Color: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
+        color = ColorParser.strToColor(scanner.next());
 
         System.out.println("Count: ");
         count = scanner.nextInt();
@@ -62,10 +62,10 @@ public class Main {
     }
 
     public static Product createBootsProduct() {
-        String productName, color;
+        String productName; Colors color;
         Float price, weight;
         Integer count, size;
-        Boolean isNaturalSkin;
+        SkinType skin;
 
         System.out.println("ProductName: ");
         productName = scanner.next();
@@ -76,8 +76,8 @@ public class Main {
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
 
-        System.out.println("Color: ");
-        color = scanner.next();
+        System.out.println("Color: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
+        color = ColorParser.strToColor(scanner.next());
 
         System.out.println("Count: ");
         count = scanner.nextInt();
@@ -85,17 +85,19 @@ public class Main {
         System.out.println("Size: ");
         size = scanner.nextInt();
 
-        System.out.println("Is natural skin: ");
-        isNaturalSkin = scanner.nextBoolean();
+        System.out.println("type skin: ");
+        skin = BootsParser.strToBoots(scanner.next());
 
 
-        return new Boots(1L, productName, price, weight, color, count, size, isNaturalSkin);
+        return new Boots(1L, productName, price, weight, color, count, size, skin);
     }
 
     public static Product createClothProduct() {
-        String productName, color, size, material;
+        String productName, size;
         Float price, weight;
         Integer count;
+        Material material;
+        Colors color;
 
         System.out.println("ProductName: ");
         productName = scanner.next();
@@ -106,17 +108,17 @@ public class Main {
         System.out.println("Weight: ");
         weight = scanner.nextFloat();
 
-        System.out.println("Color: ");
-        color = scanner.next();
+        System.out.println("Color: RED, BLUE, GREEN, WHITE, BLACK, YELLOW ");
+        color = ColorParser.strToColor(scanner.next());
 
         System.out.println("Count: ");
         count = scanner.nextInt();
 
         System.out.println("Size: ");
-        size = scanner.next();
+        size = scanner.nextLine();
 
-        System.out.println("Material: ");
-        material = scanner.next();
+        System.out.println("Material: LEATHER,FUR,COTTON,WOOL,POLYESTER,DEFAULT ");
+        material = ClothParser.strToCloth(scanner.next());
 
 
         return new Cloth(1L, productName, price, weight, color, count, size, material);
