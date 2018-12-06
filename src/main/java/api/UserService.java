@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUsers();
+    List<User> getAllUsers() throws IOException;
 
-    User getUserById(Long userId);
-    User getUserByLogin(String login);
+    User getUserById(Long userId) throws IOException;
+    User getUserByLogin(String login) throws IOException;
 
-    boolean addUser(User user) throws FileNotFoundException;
+    boolean addUser(User user) throws IOException;
     void removeUserById(Long userId) throws IOException;
 
-    boolean isLogedConfirm(String login, String password);
+    boolean isLogedConfirm(String login, String password) throws IOException;
 
 
 

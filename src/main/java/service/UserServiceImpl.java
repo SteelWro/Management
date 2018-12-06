@@ -28,16 +28,11 @@ public class UserServiceImpl implements UserService {
         return instance;
     }
 
-    public List<User> getAllUsers() {
-        try {
-            return userDao.getAllUsers();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public List<User> getAllUsers() throws IOException {
+        return userDao.getAllUsers();
     }
 
-    public User getUserById(Long userId) {
+    public User getUserById(Long userId) throws IOException {
         List<User> users = getAllUsers();
 
         for(User user : users){
@@ -46,7 +41,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    public User getUserByLogin(String login) {
+    public User getUserByLogin(String login) throws IOException {
         List<User> users = getAllUsers();
 
         for(User user : users){
@@ -55,7 +50,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    public boolean addUser(User user)  {
+    public boolean addUser(User user) throws IOException {
         try {
             if(userValidator.isValidate(user) && isUserByLoginNotExist(user.getLogin())){
                 userDao.saveUser(user);
@@ -71,7 +66,7 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    public boolean isLogedConfirm(String login, String password) {
+    public boolean isLogedConfirm(String login, String password) throws IOException {
         User user = getUserByLogin(login);
 
         if(!user.equals(null))
@@ -85,7 +80,7 @@ public class UserServiceImpl implements UserService {
         userDao.removeUserById(userId);
     }
 
-    public boolean isUserByLoginNotExist(String login) throws UserLoginAlreadyExistException {
+    public boolean isUserByLoginNotExist(String login) throws UserLoginAlreadyExistException, IOException {
         List<User> users = getAllUsers();
 
         for(User user : users){

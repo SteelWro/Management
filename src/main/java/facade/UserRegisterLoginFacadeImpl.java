@@ -6,6 +6,7 @@ import entity.User;
 import service.UserServiceImpl;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
 
@@ -13,7 +14,6 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
     UserService userService = UserServiceImpl.getInstance();
 
     private UserRegisterLoginFacadeImpl(){
-
     }
 
     public static UserRegisterLoginFacade getInstance(){
@@ -23,11 +23,20 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
         return instance;
     }
 
-    public boolean registerUser(User user) throws FileNotFoundException {
-        return userService.addUser(user);
+    public String registerUser(User user){
+        try {
+            return ""+userService.addUser(user);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public boolean loginUser(String login, String password) {
-        return userService.isLogedConfirm(login,password);
+        try {
+            return userService.isLogedConfirm(login,password);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
