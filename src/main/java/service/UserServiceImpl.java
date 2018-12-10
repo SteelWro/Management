@@ -77,6 +77,10 @@ public class UserServiceImpl implements UserService {
         userDao.removeUserById(userId);
     }
 
+    public void removeUserByName(String name) throws IOException {
+        userDao.removeUserByLogin(name);
+    }
+
     public boolean isUserByLoginNotExist(String login) throws UserLoginAlreadyExistException, IOException {
         List<User> users = getAllUsers();
 

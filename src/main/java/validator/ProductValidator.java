@@ -19,21 +19,11 @@ public class ProductValidator {
         return instance;
     }
 
-    public boolean isValidate(Product product){
-        try {
+    public boolean isValidate(Product product) throws ProductPriceNoPositiveException, ProductCountNegativeException, ProductWeightNoPositiveException, ProductNameEmptyException {
             isPriceMoreThanZero(product);
             isProductCountMoreThanZero(product);
             isWageMoreThanZero(product);
             isNameIsNotEmpty(product);
-        } catch (ProductPriceNoPositiveException e) {
-            System.out.println(e.getMessage());
-        } catch (ProductWeightNoPositiveException e) {
-            System.out.println(e.getMessage());
-        } catch (ProductCountNegativeException e) {
-            System.out.println(e.getMessage());
-        } catch (ProductNameEmptyException e) {
-            System.out.println(e.getMessage());
-        }
         return true;
     }
 

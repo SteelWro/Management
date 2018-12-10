@@ -58,7 +58,7 @@ public class UserDaoSQLImpl implements UserDao {
     public void removeUserByLogin(String login) throws IOException {
         PreparedStatement preparedStatement = null;
         try {
-            String query = "delete from "+tableName+" where login="+login;
+            String query = "delete from "+tableName+" where login = '"+login+"'";
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.execute();
             preparedStatement.close();

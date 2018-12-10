@@ -14,6 +14,7 @@ public interface UserService {
 
     boolean addUser(User user) throws IOException;
     void removeUserById(Long userId) throws IOException;
+    void removeUserByName(String name) throws IOException;
 
     boolean isLogedConfirm(String login, String password) throws IOException;
 

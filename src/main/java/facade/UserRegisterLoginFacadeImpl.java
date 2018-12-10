@@ -5,7 +5,6 @@ import api.UserService;
 import entity.User;
 import service.UserServiceImpl;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
@@ -26,7 +25,7 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
     public String registerUser(User user){
         try {
             userService.addUser(user);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return e.getMessage();
         }
@@ -41,4 +40,14 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
         }
         return false;
     }
+
+    public String removeUser(String name){
+        try{
+            userService.removeUserByName(name);
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "usunięto użytkownika ";
+    }
+
 }

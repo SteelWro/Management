@@ -4,6 +4,10 @@ import api.ProductDao;
 import api.ProductService;
 import dao.ProductDaoImpl;
 import entity.Product;
+import exception.productException.ProductCountNegativeException;
+import exception.productException.ProductNameEmptyException;
+import exception.productException.ProductPriceNoPositiveException;
+import exception.productException.ProductWeightNoPositiveException;
 import validator.ProductValidator;
 
 import java.io.IOException;
@@ -53,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-    public boolean saveProduct(Product product) throws IOException {
+    public boolean saveProduct(Product product) throws IOException, ProductPriceNoPositiveException, ProductNameEmptyException, ProductCountNegativeException, ProductWeightNoPositiveException {
         if(productValidator.isValidate(product)){
             productDao.saveProduct(product);
             return true;
@@ -61,8 +65,8 @@ public class ProductServiceImpl implements ProductService {
     return false;
     }
 
-    public void removeProduct(Product product) throws IOException {
-        productDao.removeProductByName(product.getProductName());
+    public void removeProduct(String productName) throws IOException {
+        productDao.removeProductByName(productName);
     }
 
     public Product getProductByProductName(String productName) throws IOException {

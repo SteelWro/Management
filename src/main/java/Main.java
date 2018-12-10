@@ -1,3 +1,4 @@
+import api.ProductFacade;
 import api.ProductService;
 import api.UserRegisterLoginFacade;
 import entity.Boots;
@@ -10,6 +11,7 @@ import entity.User;
 import entity.parser.BootsParser;
 import entity.parser.ClothParser;
 import entity.parser.ColorParser;
+import facade.ProductFacadeImpl;
 import facade.UserRegisterLoginFacadeImpl;
 import service.ProductServiceImpl;
 
@@ -23,13 +25,16 @@ public class Main {
     public static void startMenu() {
         System.out.println("MANAGEMENT MENU");
         System.out.println("1 - Zaloguj się");
-        System.out.println("2 - Zarejestruj się");
+        System.out.println("2 - Usuń użytkownika");
+        System.out.println("3 - Zarejestruj się");
         System.out.println("0 - Wyjdź");
     }
 
     public static void loggedMenu() {
         System.out.println("MANAGEMENT MENU");
-        System.out.println("1 - Dodaj nowy product");
+        System.out.println("1 - Dodaj nowy produkt");
+        System.out.println("2 - usuń produkt");
+        System.out.println("3 - wyświetl produkty");
         System.out.println("0 - Wyloguj się");
     }
 
@@ -124,8 +129,11 @@ public class Main {
         return new Cloth(1L, productName, price, weight, color, count, size, material);
     }
 
+
+
     public static void main(String[] args) {
         UserRegisterLoginFacade userFacade = UserRegisterLoginFacadeImpl.getInstance();
+        ProductFacade productFacade = ProductFacadeImpl.getInstance();
         ProductService productService = ProductServiceImpl.getInstance();
         boolean appOn = true;
         boolean loggedOn = false;
@@ -148,19 +156,21 @@ public class Main {
                         System.out.println("Niepoprawne dane!");
                     }
                     break;
-                case 2:
+                case 3:
                     System.out.println("Podaj login:");
                     String loginReg = scanner.next();
                     System.out.println("Podaj hasło:");
                     String passwordReg = scanner.next();
                     User user = new User(1L, loginReg, passwordReg);
-                    try {
-                        System.out.println(userFacade.registerUser(user));
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                    System.out.println(userFacade.registerUser(user));
+
                     break;
-                case 0:
+                case 2:
+                    System.out.println("Podaj login:");
+                    String readLogin = scanner.next();
+                    System.out.println(userFacade.removeUser(readLogin));
+
+                    case 0:
                     appOn = false;
                     break;
             }
@@ -186,25 +196,23 @@ public class Main {
                                 product = createOtherProduct();
                                 break;
                         }
-                        try {
-                            if (productService.saveProduct(product)) {
-                                System.out.println("Produkt został utworzony");
-                            } else {
-                                System.out.println("Produkt nie został utworzony.");
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        System.out.println(productFacade.createProduct(product));
                         break;
-
-
+                    case 2:
+                        System.out.println("Podaj nazwe produktu do usunięcia");
+                        String name = scanner.next();
+                        System.out.println(productFacade.removeProduct(name));
+                        break;
+                    case 3:
+                        System.out.println(productFacade.getAllProducts());
+                        break;
                     case 0:
                         loggedOn = false;
                         break;
                 }
 
 
-            }
+            }//end while
 
 
         }
