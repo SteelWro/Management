@@ -25,17 +25,19 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
 
     public String registerUser(User user){
         try {
-            return ""+userService.addUser(user);
+            userService.addUser(user);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
+            return e.getMessage();
         }
+        return " użytkownik zarejestrowany ";
     }
 
     public boolean loginUser(String login, String password) {
         try {
             return userService.isLogedConfirm(login,password);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return false;
     }

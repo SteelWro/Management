@@ -1,9 +1,6 @@
 package validator;
 
-import api.UserDao;
-import dao.UserDaoImpl;
 import entity.User;
-import exception.userException.UserLoginAlreadyExistException;
 import exception.userException.UserShortLengthPasswordException;
 import exception.userException.UserShortLoginLengthException;
 

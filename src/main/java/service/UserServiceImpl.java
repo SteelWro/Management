@@ -2,20 +2,19 @@ package service;
 
 import api.UserDao;
 import api.UserService;
-import validator.UserValidator;
-import dao.UserDaoImpl;
+import dao.UserDaoSQLImpl;
 import entity.User;
 import exception.userException.UserLoginAlreadyExistException;
 import exception.userException.UserShortLengthPasswordException;
 import exception.userException.UserShortLoginLengthException;
+import validator.UserValidator;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private static UserServiceImpl instance = null;
-    private UserDao userDao = UserDaoImpl.getInstance();
+    private UserDao userDao = UserDaoSQLImpl.getInstance();
     private UserValidator userValidator = UserValidator.getInstance();
 
     private UserServiceImpl(){
@@ -67,12 +66,10 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean isLogedConfirm(String login, String password) throws IOException {
-        User user = getUserByLogin(login);
+        List<User> users = getAllUsers();
 
-        if(!user.equals(null))
-        {
-            return user.getPassword().equals(password);
-        }
+        for(User user : users)
+            if(user.getLogin().equals(login) && user.getPassword().equals(password)) return true;
         return false;
     }
 

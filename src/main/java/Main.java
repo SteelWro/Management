@@ -155,11 +155,7 @@ public class Main {
                     String passwordReg = scanner.next();
                     User user = new User(1L, loginReg, passwordReg);
                     try {
-                        if (userFacade.registerUser(user)) {
-                            System.out.println("Zarejestrowałeś się!");
-                        } else {
-                            System.out.println("Cos poszło nie tak!");
-                        }
+                        System.out.println(userFacade.registerUser(user));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }

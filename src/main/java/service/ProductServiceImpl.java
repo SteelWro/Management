@@ -14,7 +14,7 @@ public class ProductServiceImpl implements ProductService {
     private static ProductServiceImpl instance = null;
     ProductValidator productValidator = ProductValidator.getInstance();
 
-    private ProductServiceImpl(){
+    public ProductServiceImpl(){
     }
 
     public static ProductServiceImpl getInstance(){
