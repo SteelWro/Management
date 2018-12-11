@@ -55,7 +55,7 @@ public class UserDaoSQLImpl implements UserDao {
         }
     }
 
-    public void removeUserByLogin(String login) throws IOException {
+    public void removeUserByLogin(String login) {
         PreparedStatement preparedStatement = null;
         try {
             String query = "delete from "+tableName+" where login = '"+login+"'";
@@ -67,7 +67,7 @@ public class UserDaoSQLImpl implements UserDao {
         }
     }
 
-    public void removeUserById(Long id) throws IOException {
+    public void removeUserById(Long id) {
         PreparedStatement preparedStatement = null;
         try {
             String query = "delete from "+tableName+" where id="+id;
@@ -79,7 +79,7 @@ public class UserDaoSQLImpl implements UserDao {
         }
     }
 
-    public List<User> getAllUsers() throws IOException {
+    public List<User> getAllUsers() {
         List<User> users = new ArrayList<User>();
         Statement statement = null;
 

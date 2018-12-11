@@ -50,7 +50,6 @@ public class ProductDaoImpl implements ProductDao{
                 products.remove(i);
             }
         }
-
         saveProducts(products);
     }
 
@@ -64,7 +63,6 @@ public class ProductDaoImpl implements ProductDao{
                 products.remove(i);
             }
         }
-
         saveProducts(products);
     }
 
@@ -82,34 +80,6 @@ public class ProductDaoImpl implements ProductDao{
         }
 
         bufferedReader.close();
-
         return products;
     }
-//to jest niepotrzebne
-//    public Product getProductById(Long productId) throws IOException{
-//        List<Product> products = null;
-//        products = getAllProducts();
-//        boolean find = false;
-//        for(Product product : products){
-//            if(product.getId().equals(productId)) find = true; return product;
-//        }
-//        return null;
-//    }
-//
-//    public Product getProductByProductName(String productName) throws IOException {
-//        List<Product> products = null;
-//        products = getAllProducts();
-//
-//        boolean find = false;
-//        for(Product product : products){
-//            if(product.getId().equals(productName)) find = true; return product;
-//        }
-//        return null;
-//
-//    }
-
-
-
-
-
 }
