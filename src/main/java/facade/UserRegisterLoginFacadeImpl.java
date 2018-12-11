@@ -25,11 +25,10 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
     public String registerUser(User user){
         try {
             userService.addUser(user);
+            return " użytkownik zarejestrowany ";
         } catch (Exception e) {
-            e.printStackTrace();
             return e.getMessage();
         }
-        return " użytkownik zarejestrowany ";
     }
 
     public boolean loginUser(String login, String password) {
@@ -49,5 +48,4 @@ public class UserRegisterLoginFacadeImpl implements UserRegisterLoginFacade {
         }
         return "usunięto użytkownika ";
     }
-
 }

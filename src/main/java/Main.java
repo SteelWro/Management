@@ -156,6 +156,13 @@ public class Main {
                         System.out.println("Niepoprawne dane!");
                     }
                     break;
+
+                case 2:
+                    System.out.println("Podaj login:");
+                    String readLogin = scanner.next();
+                    System.out.println(userFacade.removeUser(readLogin));
+                    break;
+
                 case 3:
                     System.out.println("Podaj login:");
                     String loginReg = scanner.next();
@@ -163,14 +170,9 @@ public class Main {
                     String passwordReg = scanner.next();
                     User user = new User(1L, loginReg, passwordReg);
                     System.out.println(userFacade.registerUser(user));
-
                     break;
-                case 2:
-                    System.out.println("Podaj login:");
-                    String readLogin = scanner.next();
-                    System.out.println(userFacade.removeUser(readLogin));
 
-                    case 0:
+                case 0:
                     appOn = false;
                     break;
             }

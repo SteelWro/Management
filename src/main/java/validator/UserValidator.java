@@ -25,8 +25,6 @@ public class UserValidator {
         return true;
     }
 
-
-
     private boolean isLoginLengthNotEnough(String login){
         return login.length() < 4;
     }

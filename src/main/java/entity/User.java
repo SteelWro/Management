@@ -26,9 +26,9 @@ public class User {
     }
 
 
-        @Override
-        public String toString() {
-            return id + USER_SEPARATOR + login + USER_SEPARATOR + password;
-        }
+    @Override
+    public String toString() {
+        return id + USER_SEPARATOR + login + USER_SEPARATOR + password;
+    }
 
 }

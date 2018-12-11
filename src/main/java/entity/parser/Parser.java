@@ -7,7 +7,6 @@ import entity.Enum.Material;
 import entity.Enum.ProductSeparators;
 import entity.Enum.SkinType;
 import entity.Product;
-import entity.User;
 
 
 public class Parser {
@@ -60,14 +59,14 @@ public class Parser {
 
         return (new Product(id, productName, price, weight, color, productCount));
     }
-
-    public static User parseStringToUser(String line){
-        String[] userInf = line.split(User.USER_SEPARATOR);
-
-        Long id = Long.parseLong(userInf[0]);
-        String login = userInf[1];
-        String password = userInf[2];
-
-        return(new User(id,login,password));
-    }
+ //używane przed MySQL
+//    public static User parseStringToUser(String line){
+//        String[] userInf = line.split(User.USER_SEPARATOR);
+//
+//        Long id = Long.parseLong(userInf[0]);
+//        String login = userInf[1];
+//        String password = userInf[2];
+//
+//        return(new User(id,login,password));
+//    }
 }
