@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> getAllProducts() throws IOException;
+
     Integer getProductsCount() throws IOException;
     Product getProductByProductName(String ProductName) throws IOException;
 
@@ -19,5 +20,6 @@ public interface ProductService {
     Boolean isProductExist(Long id) throws IOException;
 
     boolean saveProduct(Product product) throws IOException, ProductPriceNoPositiveException, ProductNameEmptyException, ProductCountNegativeException, ProductWeightNoPositiveException;
+
     void removeProduct(String product) throws IOException;
 }
